@@ -20,6 +20,9 @@
   "scripts": {
     "dev": "nodemon index.js"
   },
+  "eslintConfig": {
+    "extends": ["./node_modules/standard/eslintrc.json"]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -14,10 +14,23 @@ const port = process.env.PORT ?? 3000;
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "exp://192.168.0.10:8081",
+  "http://localhost:8081"
+]
+//Se usan los modulos que importamos
 app.use(
   cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-    origin: process.env.ORIGIN ?? "http://localhost:5173",
   })
 );
 
